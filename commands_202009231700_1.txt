@@ -1,0 +1,62 @@
+    1  exit
+    2  lab auth-provider start
+    3  source /usr/local/etc/ocp4.config
+    4  htpasswd -c -B -b ~/DO280/labs/auth-provider/htpasswd admin redhat
+    5  htpasswd -help
+    6  htpasswd -c -B -b ~/DO280/labs/auth-provider/htpasswd developer developer
+    7  cat ~/DO280/labs/auth-provider/htpasswd 
+    8  htpasswd -c -B -b ~/DO280/labs/auth-provider/htpasswd admin redhat
+    9  htpasswd -b ~/DO280/labs/auth-provider/htpasswd developer developer
+   10  cat ~/DO280/labs/auth-provider/htpasswd 
+   11  oc login -u kubeadmin -p ${RHT_OCP4_KUBEADM_PASSWD} https://api.ocp4.example.com:6443
+   12  oc create secret generic localusers --from-file htpasswd=/home/student/DO280/labs/auth-provider/htpasswd -n openshift-config
+   13  oc adm policy add-cluster-role-to-user cluster-admin admin
+   14  oc get oauth cluster -o yaml > ~/DO280/labs/auth-provider/oauth.yaml
+   15  vi ~/DO280/labs/auth-provider/oauth.yaml
+   16  oc replace -f ~/DO280/labs/auth-provider/oauth.yaml
+   17  vi ~/DO280/labs/auth-provider/oauth.yaml
+   18  oc replace -f ~/DO280/labs/auth-provider/oauth.yaml
+   19  oc login -u admin -p redhat
+   20  oc get nodes
+   21  oc login -u developer -p developer
+   22  oc get nodes
+   23  oc login -u admin -p redhat
+   24  oc get users
+   25  oc get identity
+   26  oc extract secret/localusers -n openshift-config --to ~/DO280/labs/auth-provider/ --confirm
+   27  htpasswd -b ~/DO280/labs/auth-provider/htpasswd manager redhat
+   28  cat ~/DO280/labs/auth-provider/htpasswd
+   29  oc set data secret/localusers --from-file htpasswd=homestudent/DO280/labs/auth-provider/htpasswd -n openshift-config
+   30  oc set data secret/localusers --from-file htpasswd=/home/student/DO280/labs/auth-provider/htpasswd -n openshift-config
+   31  oc login -u manager -p redhat
+   32  oc new-project auth-provider
+   33  oc login -u developer -p developer
+   34  oc delete project auth-provider
+   35  oc login -u admin -p redhat
+   36  oc extract secret/localusers -n openshift-config --to ~/DO280/labs/auth-provider/ --confirm
+   37  MANAGEr_PASSWD="$(openssl rand -hex 15)"
+   38  htpasswd -b ~/DO280/labs/auth-provider/htpasswd manager ${MANAGEr_PASSWD}
+   39  oc set data secretlocalusers --from-file htpasswd=/home/student/DO280/labs/auth-provider/htpasswd -n openshift-config
+   40  oc set data secret/localusers --from-file htpasswd=/home/student/DO280/labs/auth-provider/htpasswd -n openshift-config
+   41  oc login -u manager -p ${MANAGEr_PASSWD}
+   42  oc login -u admin -p redhat
+   43  oc extract secret/localusers -n openshift-config --to ~/DO280/labs/auth-provider/ --confirm
+   44  htpasswd -D ~/DO280/labs/auth-provider/htpasswd manager
+   45  oc set data secret/localusers --from-file htpasswd=/home/student/DO280/labs/auth-provider/htpasswd -n openshift-config
+   46  oc delete identity "myusers:manager"
+   47  oc delete user manager
+   48  oc login -u manager -p ${MANAGEr_PASSWD}
+   49  oc get users
+   50  oc get identity
+   51  oc extract secret/localusers -n openshift-config --to -
+   52  oc login -u kubeadmin -p ${RHT_OCP4_KUBEADM_PASSWD}
+   53  oc delete project auth-provider
+   54  oc edit oauth
+   55  oc delete secret localusers -n openshift-config
+   56  oc delete user --all
+   57  oc delete identity --all
+   58  lab auth-provider finish
+   59  history
+   60  history > commands_202009231700_1.tx
+   61  cp commands_202009231_1.tx /home/student/DO180-apps/
+   62  history > commands_202009231700_1.txt
