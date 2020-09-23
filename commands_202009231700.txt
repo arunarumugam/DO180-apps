@@ -1,0 +1,51 @@
+    1  exit
+    2  lab execute-troubleshoot start
+    3  source /usr/local/etc/ocp4.config
+    4  oc login -u kubeadmin -p ${RHT_OCP4_KUBEADM_PASSWD} httpS://api.ocp4.example.coM:6443
+    5  oc login -u kubeadmin -p ${RHT_OCP4_KUBEADM_PASSWD} https://api.ocp4.example.com:6443
+    6  oc get nodes
+    7  oc adm top node
+    8  oc describe node master01
+    9  oc get pod -n openshift-image-registry
+   10  oc logs --tail 3 -n openshift-image-registry cluster-image-registry-operator-5f47f6fcf7-bh22s
+   11  oc logs --tail 3 -n openshift-image-registry -c cluster-image-registry-operator cluster-image-registry-operator-5f47f6fcf7-bh22s
+   12  oc get pod
+   13  oc get pod -n openshift-image-registry
+   14  oc logs --tail 3 -n openshift-image-registry  image-registry-64b69c4bf9-48xl5
+   15  oc adm node-logs --tail 3 -u kubelet master01
+   16  oc debug node/master01
+   17  oc project execute-troubleshoot
+   18  oc get pod
+   19  oc status
+   20  oc get events
+   21  skopeo inspect docker://registry.access.redhat.com/rhscl/postgresq-96-rhel7:1
+   22  skopeo inspect docker://registry.access.redhat.com/rhscl/postgresq-96-rhel7
+   23  skopeo inspect docker://registry.access.redhat.com/rhscl/postgresql-96-rhel7:1
+   24  oc edit deployment/psql
+   25  oc status
+   26  oc get pods
+   27  lab execute-troubleshoot finish
+   28  git checkout master
+   29  pwd
+   30  git clone https://github.com/arunarumugam/DO180-apps
+   31  history > commands_202009231451.txt
+   32  git checkout master_arun
+   33  git push -u origin
+   34  git add .
+   35  cd DO280/
+   36  cd ..
+   37  cd DO280/
+   38  history > commands_202009231451.txt
+   39  git checkout -b history
+   40  git add .
+   41  git commit -m 'history'
+   42  git checkout master
+   43  cd ..
+   44  ls -lrt
+   45  cd DO180-apps/
+   46  git checkout master
+   47  history > commands_202009231500.txt
+   48  git add commands_202009231500.txt 
+   49  git commit -m 'history_202009231500'
+   50  git push origin
+   51  history > commands_202009231700.txt
